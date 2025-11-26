@@ -1,6 +1,6 @@
 .data
 array:
-  .word 1, -2, 3, 4, 5, 6, -7, 8, 9, 10, 11, 12, -13, 14, 15, 16, 17, 18, 19, -20
+  .word 1, -2, 3, 4, 5, 6, -7, 8, 9, 10, -10, 12, -13, 14, 15, 16, 17, 18, 19, -20
 
 .text
 .globl _start
@@ -9,11 +9,14 @@ start:
   li a2, 4
   la a0, array
   jal ra, get_min_count
+  li a0, 10
+  ecall
 
 get_min_count:
   li a3, 0 # ind1, от 0 до 4
   li a4, 0 # ind2, от 0 до 3
   li a5, 0 # result
+
 loop:
   mul a6, a3, a2
   add a6, a6, a4      # теперь в а6 лежит индекс
@@ -35,5 +38,7 @@ index_1m_change:
   beqz t1, tran_res_a0
   j loop
 tran_res_a0:
-  mv a0, a5 
-  ret  # возврат из функции
+  mv a1, a5       # результат в a0
+  li a0, 1
+  ecall
+  ret             # возврат из функции
