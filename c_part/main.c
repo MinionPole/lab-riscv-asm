@@ -17,7 +17,7 @@ int main() {
     {-13, 14, 15, 16},
     {17, 18, 19, -20}
   };
-  get_min(data, n, m);
+  get_min(data);
   return 0;
 }
 //riscv64-unknown-elf-gcc -march=rv32i -mabi=ilp32 main.c -o main.elf
